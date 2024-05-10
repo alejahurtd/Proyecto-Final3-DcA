@@ -2,33 +2,12 @@ import MenuStyle from './Menu.css';
 import { dispatch } from '../../store/index';
 import { navigate } from '../../store/actions';
 import { Screens } from '../../types/store';
-
-export enum Attribute {
-	'user' = 'user',
-}
+import logoImg from '../../../img/logo.png';
+import notificationsIcon from '../../../img/icon notifications.png';
+import homeIcon from '../../../img/icon home.png';
+import profileIcon from '../../../img/icon profile.png';
 
 class MenuFeed extends HTMLElement {
-	publication?: string;
-	likes?: string;
-	user?: string;
-	caption?: string;
-
-	static get observedAttributes() {
-		const attrs: Record<Attribute, null> = {
-			user: null,
-		};
-		return Object.keys(attrs);
-	}
-
-	attributeChangedCallback(propName: Attribute, oldValue: string | undefined, newValue: string | undefined) {
-		switch (propName) {
-			default:
-				this[propName] = newValue;
-				break;
-		}
-		this.render();
-	}
-
 	constructor() {
 		super();
 		this.attachShadow({ mode: 'open' });
@@ -40,46 +19,45 @@ class MenuFeed extends HTMLElement {
 
 	render() {
 		if (this.shadowRoot) {
-			this.shadowRoot.innerHTML = ``;
+			this.shadowRoot.innerHTML = '';
 
 			const styleElement = document.createElement('style');
 			styleElement.textContent = MenuStyle;
-			this.shadowRoot?.appendChild(styleElement);
+			this.shadowRoot.appendChild(styleElement);
 
-			const container = this.ownerDocument.createElement('div');
-			container.classList.add('generalContainer');
-			this.shadowRoot?.appendChild(container);
+			this.shadowRoot.innerHTML += `
+				<nav class="menu-bar">
+					<div class="logo">
+					<img src="${new URL(logoImg).href}" alt="logo">
+					</div>
+					<div class="search-box">
+						<input type="text" class="search-box-input" placeholder="Search...">
+					</div>
+					<div class="icons">
+						<img src="${notificationsIcon}" alt="Icono notificaciones" class="icon">
+						<img src="${homeIcon}" alt="Icono home" class="icon home-icon" id="homeButton">
+						<img src="${profileIcon}" alt="Icono profile" class="icon profile-icon" id="profileButton">
+					</div>
+				</nav>
+				<div class="line-separator"></div>
+			`;
+			this.setupEventListeners();
+		}
+	}
 
-			const listIcons = this.ownerDocument.createElement('ul');
-			listIcons.classList.add('list');
+	setupEventListeners() {
+		const homeButton = this.shadowRoot!.querySelector('#homeButton');
+		const profileButton = this.shadowRoot!.querySelector('#profileButton');
 
-			const searchButton = this.ownerDocument.createElement('img');
-			searchButton.src = '/img/Iconbuscar.png';
-			searchButton.classList.add('icons');
-			listIcons.appendChild(searchButton);
-
-			const notificationButton = this.ownerDocument.createElement('img');
-			notificationButton.src = '/img/notificationIcon.png';
-			notificationButton.classList.add('icons');
-			listIcons.appendChild(notificationButton);
-
-			const homeButton = this.ownerDocument.createElement('img');
-			homeButton.src = '/img/Iconhome.png';
-			homeButton.classList.add('iconsSelection');
-			listIcons.appendChild(homeButton);
+		if (homeButton) {
 			homeButton.addEventListener('click', () => {
 				dispatch(navigate(Screens.DASHBOARD));
 			});
-
-			const profileButton = this.ownerDocument.createElement('img');
-			profileButton.src = 'https://m.media-amazon.com/images/I/91LYRChMy-L._SX1248_CR0%2C0%2C1248%2C1248_.jpg';
-			profileButton.classList.add('user');
-			listIcons.appendChild(profileButton);
+		}
+		if (profileButton) {
 			profileButton.addEventListener('click', () => {
 				dispatch(navigate(Screens.USER_PROFILE));
 			});
-
-			container.appendChild(listIcons);
 		}
 	}
 }
