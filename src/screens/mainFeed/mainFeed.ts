@@ -82,11 +82,6 @@ class MainFeed extends HTMLElement {
 		menucard.setAttribute(MenuCardAttribute.user, '@a.miller');
 		this.shadowRoot?.appendChild(menucard);
 
-		const imgfeed = document.createElement('h3');
-		imgfeed.textContent = '.RawFeed';
-		imgfeed.classList.add('imgFeed');
-		this.shadowRoot?.appendChild(imgfeed);
-
 		const generalContainer = document.createElement('section');
 		generalContainer.classList.add('general');
 		this.shadowRoot?.appendChild(generalContainer);
