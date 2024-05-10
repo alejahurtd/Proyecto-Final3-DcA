@@ -1,0 +1,52 @@
+@media screen and (max-width: 767px) {
+  .generalContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .icons {
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+  }
+
+  .iconsSelection {
+    width: 40px;
+    height: 40px;
+  }
+
+  .user {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    object-fit: cover;
+    border: 2px solid #b8fe67;
+  }
+
+  .userSelection {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+    object-fit: cover;
+    border: 2px solid #b8fe67;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 3000px) {
+  .generalContainer {
+    display: none;
+  }
+}

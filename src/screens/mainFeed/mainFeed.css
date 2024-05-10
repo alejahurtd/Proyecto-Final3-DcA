@@ -1,0 +1,32 @@
+* {
+  font-family: "Inter", sans-serif;
+}
+
+.imgFeed {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2%;
+}
+
+/*@media screen and (min-width: 1024px) {
+  .general {
+    display: grid;
+    grid-auto-flow: dense;
+    grid-template-columns: 1fr 1fr; /* Crea dos columnas de igual ancho */
+/*justify-content: center; /* Centra horizontalmente */
+/*margin: 0% 10%;}/*
+}*/
+
+@media screen and (min-width: 1024px) {
+  .general {
+    margin-left: 30%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .general {
+    margin-left: 30%;
+  }
+}
